@@ -1,0 +1,10 @@
+# Typst artifacts
+output/*.png
+output/*.log
+output/*.tmp
+
+# Environment / OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
