@@ -15,18 +15,13 @@
 // ── Profile Summaries ────────────────────────────────────────────────────────
 
 #let summary-swe = [
-  Computer Engineering graduate student at University of Tehran specializing in algorithms, computations,
-  and distributed systems. 8+ years of engineering craftsmanship designing high-throughput transaction backends,
-  multi-tenant B2B2C platforms, and financial ledgers. Proven track record architecting mission-critical systems
-  in production across Go, Java (Spring Boot), TypeScript, and PostgreSQL. Combines deep algorithmic problem-solving
-  with pragmatic product ownership.
+  8+ years engineering high-throughput transaction backends, multi-tenant B2B2C platforms, and mission-critical financial ledgers across Go, Java (Spring Boot), TypeScript, and PostgreSQL.
+  Currently pursuing M.Sc. in Algorithms & Computation at University of Tehran — combining deep systems thinking with pragmatic product ownership.
 ]
 
 #let summary-pm = [
-  Technical Product Manager with a strong computer engineering and systems-design background. Bridges business
-  strategy, user discovery, and technical execution. Experienced in mapping complex, ambiguous business domains
-  (multi-tenant B2B2C platforms, OTC gold trading, financial exchanges) into intuitive user experiences and precise
-  engineering specifications. Experienced leading cross-functional teams across engineering, UI/UX, and operations.
+  Technical PM bridging business strategy, user discovery, and engineering execution across fintech, gaming, and AI tooling domains.
+  Maps ambiguous business problems (OTC gold trading, crypto exchanges, multi-tenant SaaS) into precise product specs and intuitive user experiences — fluent in both Figma and distributed systems architecture.
 ]
 
 // ── Hot Skills Inventory (Featured on Page 1) ────────────────────────────────
@@ -287,18 +282,18 @@
     title:  "Software Engineering Bootcamp",
     issuer: "Digikala",
     date:   "Sep 2022",
-    detail: "Intensive training in advanced backend development, API design, database architecture, design patterns, and cross-functional communication.",
+    detail: "Backend, APIs, database architecture, design patterns, cross-functional collaboration.",
   ),
   (
     title:  "Machine Learning Specialization",
     issuer: "DeepLearning.AI",
     date:   "Mar 2023",
-    detail: "Comprehensive study of foundational machine learning, neural networks, loss optimization, and engineering practices for building ML systems.",
+    detail: "Neural networks, loss optimization, and engineering practices for ML systems.",
   ),
   (
     title:  "Cybersecurity Advanced Workshop",
-    issuer: "Quera & National Banking Specialists",
+    issuer: "Quera & National Banking",
     date:   "May 2023",
-    detail: "Practical security training with national banking specialists covering web security, reverse engineering, and applied cryptography.",
+    detail: "Web security, reverse engineering, and applied cryptography with national banking specialists.",
   ),
 )
