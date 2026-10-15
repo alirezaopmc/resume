@@ -1,7 +1,7 @@
-# Typst artifacts
 output/*.png
 output/*.log
 output/*.tmp
+v6.1-extracted.txt
 
 # Environment / OS
 .DS_Store

@@ -1,16 +1,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// swe-resume.typ — Senior Software Engineer (Compact 1-Page Edition)
-// Compile: typst compile --font-path fonts swe-resume.typ output/alireza-jafartash-swe.pdf
+// swe-resume.typ — Senior Software Engineer (Two-Page Executive Dossier)
+// Page 1: Profile & Core Arsenal (Hot Skills) · Featured Tools · Education · Honors
+// Page 2: Detailed Professional Experience Dossier (Financial Ledgers, Systems)
 // ─────────────────────────────────────────────────────────────────────────────
 
-#import "lib/resume.typ": resume-doc, render-resume
+#import "lib/resume.typ": resume-doc, render-two-page-resume
 #import "data/profile.typ" as profile
 
-#show: resume-doc.with(compact: true)
+#show: resume-doc
 
-#render-resume(
+#render-two-page-resume(
   profile,
   view: "swe",
-  compact: true,
-  section-order: ("profile", "experience", "projects", "skills", "education"),
 )

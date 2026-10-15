@@ -4,84 +4,52 @@ Modular, minimal, high-density professional resumes built on [Typst](https://typ
 
 ---
 
-## 📑 Resume Editions
+## 📑 2-Page Executive Architecture
 
-| Edition | Target Audience | Primary Focus | Pages | Entrypoint | Output |
-| :--- | :--- | :--- | :---: | :--- | :--- |
-| **Senior SWE (Compact)** | Engineering Leaders, CTOs, Staff Roles | Systems design, financial ledgers, low latency, AI ops | **1** | [`swe-resume.typ`](./swe-resume.typ) | `output/alireza-jafartash-swe.pdf` |
-| **Technical PM (Compact)** | Product Leadership, Founders, VPs of Product | Discovery, user needs, cross-team bridge, UI/UX | **1** | [`pm-resume.typ`](./pm-resume.typ) | `output/alireza-jafartash-pm.pdf` |
-| **Senior SWE (Extended)** | Enterprise dossiers, academic, detailed reviews | Deep architectural narratives & infrastructure traces | **2** | [`swe-resume-extended.typ`](./swe-resume-extended.typ) | `output/alireza-jafartash-swe-extended.pdf` |
-| **Technical PM (Extended)** | Product leadership reviews & case studies | Full discovery, roadmapping, and metric outcomes | **2** | [`pm-resume-extended.typ`](./pm-resume-extended.typ) | `output/alireza-jafartash-pm-extended.pdf` |
+Every resume is structured across two pages with dedicated responsibilities:
+
+- **PAGE 1: Executive Briefing & Core Arsenal**
+  - **Identity & Status**: Name, Live Status Pill (`Open to Senior SWE & Staff / Technical PM roles`), Contacts (`alirezaopmc@gmail.com`, `jtash.ir`, GitHub, LinkedIn).
+  - **00 / Profile**: Executive thesis highlighting algorithmic foundation and 8+ years of systems craftsmanship.
+  - **01 / Core Arsenal**: Categorized hot skills (Languages, Systems & Ledgers, Databases, Cloud & Infra, Architecture).
+  - **02 / Notable Products & Tools**: Promux (AI CLI multiplexer), Orbit Platform, Dorost (Typst package), Distributed UUID Generator.
+  - **03 / Education**: University of Tehran (M.Sc. Algorithms & Computation) & Babol Noshirvani (B.Sc. Computer Engineering).
+  - **04 / Honors & Competitions**: Bale Golang 2nd Place, Digikala DevOps Top 20, Quera Cybersecurity Top 30, Codeforces Top 300.
+
+- **PAGE 2: Professional Experience Dossier & Credentials**
+  - **Header Runner**: Continuous document chrome (`ALIREZA JAFARTASH // EXPERIENCE DOSSIER · PAGE 2/2`).
+  - **05 / Detailed Experience**: Full chronological track record with exact dates and technologies from `resume-v6.1.pdf` + recent ventures:
+    - *Independent / Enterprise Clients* (2025 — Present): Goldstein Gold Trading Platform & Restaurant Inventory System
+    - *Manova* (2024 — Present): Orbit Platform Toolkit & Promux
+    - *University of Tehran — Dept. of Science* (2024 — Present): Head TA — Advanced Programming (15+ TAs, 200+ students)
+    - *LvtGames, Turkiye (Remote)* (Aug 2024 — 2025): Multi-tenant B2B2C, High-Throughput Wallets, Terraform GCP, Feature Owner / PM
+    - *SwapWallet, Tehran* (May 2025 — Jul 2025): Crypto Trading Exchange, Low-Latency Concurrency, Telegram utility bot
+    - *Ultratrader, Tehran* (Feb 2024 — Oct 2024): Financial Market Preprocessing Pipeline, Broker APIs & Proxies
+    - *Ravindex, Tehran* (May 2022 — Dec 2023): Tehran Stock Exchange Market Data Analytics, Microservices, Replicated DBs
+    - *Plotset & Cubecraft* (2016 — 2022): AI Charting Tools R&D (US) & Minecraft Spigot Game Network FSM Engine (UK)
+  - **06 / Credentials**: 3-card footer grid with verified certifications (Digikala Software Engineering, DeepLearning.AI Machine Learning, Quera Cybersecurity).
 
 ---
 
-## 🏛️ Architecture & Modularity
+## 🏛️ Editions Available
 
-The repository separates **Data**, **Presentation Engine**, and **Entrypoint Configurations**:
-
-```
-.
-├── data/
-│   └── profile.typ          # Canonical single source of truth (experience, bullets, skills, tools)
-├── lib/
-│   └── resume.typ           # Layout engine: jtash.ir visual tokens, numbered rails, status pills
-├── fonts/                   # Bundled Inter & JetBrains Mono fonts
-├── swe-resume.typ           # SWE 1-page compact configuration
-├── pm-resume.typ            # PM 1-page compact configuration
-├── swe-resume-extended.typ  # SWE 2-page deep-dive configuration
-├── pm-resume-extended.typ   # PM 2-page deep-dive configuration
-└── Makefile                 # Build automation
-```
-
-### 🔀 Reordering Sections on the Fly
-
-You can reorder sections dynamically based on the company or opportunity you're targeting:
-
-```typ
-#import "lib/resume.typ": resume-doc, render-resume
-#import "data/profile.typ" as profile
-
-#show: resume-doc.with(compact: true)
-
-#render-resume(
-  profile,
-  view: "swe", // or "pm"
-  compact: true,
-  section-order: (
-    "profile",
-    "skills",     // e.g. Put skills before experience for tech screeners
-    "projects",   // Highlight Promux & Orbit before work history
-    "experience",
-    "education",
-  ),
-)
-```
+| Edition | Focus | Entrypoint | Output |
+| :--- | :--- | :--- | :--- |
+| **Senior Software Engineer** | Systems design, financial ledgers, concurrency, microservices | [`swe-resume.typ`](./swe-resume.typ) | `output/alireza-jafartash-swe.pdf` |
+| **Technical Product Manager** | User discovery, PRDs, cross-functional bridge, UI/UX, feature ownership | [`pm-resume.typ`](./pm-resume.typ) | `output/alireza-jafartash-pm.pdf` |
 
 ---
 
 ## 🛠️ Build Commands
 
 ```bash
-# Build all 4 PDF variants
+# Build both 2-page PDFs
 make all
 
-# Build individual variants
+# Build individual edition
 make swe       # Output: output/alireza-jafartash-swe.pdf
 make pm        # Output: output/alireza-jafartash-pm.pdf
-make swe-ext   # Output: output/alireza-jafartash-swe-extended.pdf
-make pm-ext    # Output: output/alireza-jafartash-pm-extended.pdf
 
-# Render high-resolution PNG previews
+# Render high-resolution PNG previews of all pages
 make previews
 ```
-
----
-
-## 🌟 Highlights & Projects Featured
-
-- **Promux (`github.com/alirezaopmc/promux`)**: Autonomous multiplexer for agentic AI CLIs. Intercepts HTTP 429/500 quota exhaustion, auto-rotates accounts with TTL cooling, and preserves running agent session context.
-- **Manova / Orbit Toolkit (`manova.space`)**: Standardized platform framework with unified RBAC auth, token bucket rate-limiting, double-entry payment verification, and multi-tenant DB isolation.
-- **Goldstein (Jewelry Gold Trading)**: Multi-tenant gold trading engine with strict wallet accounting, over-the-counter (OTC) desk transfers, and automated 750-fineness normalization.
-- **Restaurant Inventory System**: Multi-branch real-time stock ledger, automated purchase orders, and recipe yield tracking.
-- **University of Tehran (Head TA, Advanced Programming)**: Directing 15+ TAs, designing assignment specifications, and maintaining the automated judging toolchain for 200+ students per semester.
-- **Dorost (`alirezaopmc/dorost`)**: Open-source bilingual (Persian/English) document typography package published on the official Typst package registry.

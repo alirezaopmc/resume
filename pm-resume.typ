@@ -1,16 +1,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// pm-resume.typ — Technical Product Manager (Compact 1-Page Edition)
-// Compile: typst compile --font-path fonts pm-resume.typ output/alireza-jafartash-pm.pdf
+// pm-resume.typ — Technical Product Manager (Two-Page Executive Dossier)
+// Page 1: Profile & Product Thinking Arsenal (Hot Skills) · Products · Education
+// Page 2: Detailed Experience Dossier (Discovery, Scoping, Cross-Functional Bridge)
 // ─────────────────────────────────────────────────────────────────────────────
 
-#import "lib/resume.typ": resume-doc, render-resume
+#import "lib/resume.typ": resume-doc, render-two-page-resume
 #import "data/profile.typ" as profile
 
-#show: resume-doc.with(compact: true)
+#show: resume-doc
 
-#render-resume(
+#render-two-page-resume(
   profile,
   view: "pm",
-  compact: true,
-  section-order: ("profile", "experience", "projects", "skills", "education"),
 )

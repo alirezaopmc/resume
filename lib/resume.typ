@@ -1,18 +1,20 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // lib/resume.typ — Modular Resume Template Engine for Dorost
 // Styled after jtash.ir: sharp, minimal, high-contrast, technical brutalism.
+// Two-Page Architecture: Page 1 (Intro & Arsenal) + Page 2 (Experience Dossier)
 // ─────────────────────────────────────────────────────────────────────────────
 
 #import "@local/dorost:0.2.1": document, badge, code-inline
 
 // ── Design Tokens ────────────────────────────────────────────────────────────
 
-#let c-text     = rgb("0b1120") // deep obsidian slate
-#let c-body     = rgb("1e293b") // refined body text
-#let c-muted    = rgb("64748b") // secondary slate
-#let c-accent   = rgb("1656ad") // signature tech blue (jtash.ir)
-#let c-rule     = rgb("e2e8f0") // crisp light border
-#let c-tag-bg   = rgb("f1f5f9") // badge background
+#let c-text       = rgb("0b1120") // deep obsidian slate
+#let c-body       = rgb("1e293b") // refined slate body
+#let c-muted      = rgb("64748b") // secondary slate
+#let c-accent     = rgb("1656ad") // signature tech blue (jtash.ir)
+#let c-accent-bg  = rgb("f0f6ff") // subtle blue tint
+#let c-rule       = rgb("e2e8f0") // crisp light border
+#let c-tag-bg     = rgb("f8fafc") // clean badge background
 #let c-tag-border = rgb("cbd5e1")
 
 #let font-body = ("Inter", "Liberation Sans")
@@ -20,11 +22,11 @@
 
 // ── Typography Helpers ───────────────────────────────────────────────────────
 
-#let label-mono(content, size: 7pt, fill: c-muted) = text(
+#let label-mono(content, size: 7pt, fill: c-muted, weight: "medium") = text(
   font: font-mono,
   size: size,
   fill: fill,
-  weight: "medium",
+  weight: weight,
   tracking: 0.08em,
   upper(content),
 )
@@ -32,47 +34,39 @@
 #let tag(content) = box(
   fill: c-tag-bg,
   stroke: 0.4pt + c-tag-border,
-  inset: (x: 4.5pt, y: 2pt),
+  inset: (x: 4.5pt, y: 1.8pt),
   radius: 2.5pt,
   baseline: 0%,
-  text(font: font-mono, size: 6.8pt, fill: c-body, weight: "medium", content),
+  text(font: font-mono, size: 6.6pt, fill: c-body, weight: "medium", content),
 )
 
-#let thin-rule() = line(length: 100%, stroke: 0.4pt + c-rule)
+#let thin-rule(stroke-width: 0.4pt, color: c-rule) = line(length: 100%, stroke: stroke-width + color)
 
 // ── Document Wrapper ─────────────────────────────────────────────────────────
 
-#let resume-doc(
-  body,
-  compact: true,
-) = {
-  let margin-y = if compact { 1.05cm } else { 1.4cm }
-  let margin-x = if compact { 1.3cm } else { 1.5cm }
-  let text-size = if compact { 8.6pt } else { 9.3pt }
-  let leading = if compact { 0.50em } else { 0.58em }
-
+#let resume-doc(body) = {
   set page(
     paper: "a4",
-    margin: (x: margin-x, top: margin-y, bottom: margin-y),
+    margin: (x: 1.4cm, top: 1.1cm, bottom: 1.05cm),
   )
 
   set text(
     font: font-body,
-    size: text-size,
+    size: 8.5pt,
     fill: c-body,
     lang: "en",
   )
 
   set par(
-    leading: leading,
-    spacing: if compact { 0.52em } else { 0.72em },
+    leading: 0.50em,
+    spacing: 0.55em,
     justify: false,
   )
 
   set list(
     indent: 0.35em,
-    spacing: if compact { 0.32em } else { 0.44em },
-    marker: text(fill: c-muted, font: font-mono, size: 7pt)[—],
+    spacing: 0.30em,
+    marker: text(fill: c-accent, font: font-mono, size: 6.8pt)[—],
   )
 
   show link: set text(fill: c-accent)
@@ -80,7 +74,7 @@
   body
 }
 
-// ── Header Component (jtash.ir style) ────────────────────────────────────────
+// ── Page 1 Header Component (jtash.ir style) ─────────────────────────────────
 
 #let resume-header(
   name: "",
@@ -91,11 +85,10 @@
   linkedin: "",
   github: "",
   website: "",
-  compact: true,
 ) = {
   // Top Status Bar (jtash.ir live indicator)
   if status != "" {
-    block(width: 100%, below: if compact { 4.5pt } else { 7pt })[
+    block(width: 100%, below: 5pt)[
       #grid(
         columns: (1fr, auto),
         align: (left + horizon, right + horizon),
@@ -116,23 +109,23 @@
       )
     ]
     thin-rule()
-    v(if compact { 3.5pt } else { 5pt })
+    v(4.5pt)
   }
 
-  // Identity and Contacts
+  // Identity and Contacts Grid
   grid(
     columns: (1fr, auto),
     gutter: 0pt,
     // Name & Title
     stack(
-      spacing: if compact { 2pt } else { 3pt },
-      text(font: font-body, size: if compact { 18pt } else { 21pt }, weight: "bold", fill: c-text, tracking: -0.02em, name),
-      text(font: font-body, size: if compact { 9pt } else { 10.5pt }, fill: c-muted, weight: "medium", title),
+      spacing: 2.5pt,
+      text(font: font-body, size: 21pt, weight: "bold", fill: c-text, tracking: -0.025em, name),
+      text(font: font-body, size: 9.6pt, fill: c-muted, weight: "medium", title),
     ),
-    // Right Contacts
+    // Right Contacts (Clean Monospace Stack)
     align(right + top)[
       #stack(
-        spacing: if compact { 1.8pt } else { 2.5pt },
+        spacing: 2pt,
         if email != "" {
           link("mailto:" + email, text(font: font-mono, size: 7.2pt, fill: c-accent, email))
         },
@@ -149,34 +142,62 @@
     ],
   )
 
-  v(if compact { 3.5pt } else { 5.5pt })
+  v(4.5pt)
   thin-rule()
-  v(if compact { 3.5pt } else { 6.5pt })
+  v(5pt)
 }
 
-// ── Section Container (2-Column Mono Rail) ───────────────────────────────────
+// ── Page 2 Header Runner ─────────────────────────────────────────────────────
+
+#let page-runner(name: "", title: "PROFESSIONAL EXPERIENCE DOSSIER", email: "", website: "") = {
+  block(width: 100%, below: 5pt)[
+    #grid(
+      columns: (1fr, auto),
+      align: (left + horizon, right + horizon),
+      stack(
+        dir: ltr,
+        spacing: 6pt,
+        label-mono(name, size: 7pt, fill: c-text, weight: "bold"),
+        text(font: font-mono, size: 7pt, fill: c-muted, "·"),
+        label-mono(title, size: 7pt, fill: c-accent),
+      ),
+      stack(
+        dir: ltr,
+        spacing: 8pt,
+        if email != "" { link("mailto:" + email, text(font: font-mono, size: 7pt, fill: c-muted, email)) },
+        if website != "" { link("https://" + website, text(font: font-mono, size: 7pt, fill: c-accent, website)) },
+        label-mono("PAGE 2 / 2", size: 6.8pt, fill: c-muted),
+      ),
+    )
+  ]
+  thin-rule()
+  v(5.5pt)
+}
+
+// ── Section Container (2-Column Left Rail) ───────────────────────────────────
 
 #let section(
   number: "",
   title: "",
-  compact: true,
+  rail-width: 2.3cm,
+  above: 5pt,
+  below: 4.5pt,
   body,
 ) = {
-  let rail-width = if compact { 2.2cm } else { 2.6cm }
   block(
     width: 100%,
-    above: if compact { 5.5pt } else { 8.5pt },
-    below: if compact { 4.5pt } else { 7pt },
+    above: above,
+    below: below,
   )[
     #grid(
       columns: (rail-width, 1fr),
-      gutter: if compact { 9pt } else { 13pt },
+      gutter: 10pt,
       // Left rail: numbered label
       align(right + top)[
         #stack(
           spacing: 1.5pt,
           if number != "" { label-mono(number, size: 6.2pt, fill: c-accent) },
-          label-mono(title, size: 6.8pt, fill: c-text),
+          label-mono(title, size: 6.8pt, fill: c-text, weight: "bold"),
         )
       ],
       // Right content
@@ -185,57 +206,45 @@
   ]
 }
 
-// ── Experience Entry ─────────────────────────────────────────────────────────
+// ── Skill Group Entry (Page 1) ───────────────────────────────────────────────
 
-#let entry(
-  role: "",
-  company: "",
-  period: "",
-  location: "",
-  compact: true,
-  body,
+#let skill-group(
+  category,
+  items,
 ) = {
-  block(width: 100%, below: if compact { 4.5pt } else { 6.5pt })[
-    // Line 1: Role & Period
+  block(width: 100%, below: 3pt)[
     #grid(
-      columns: (1fr, auto),
-      text(weight: "bold", size: if compact { 8.7pt } else { 9.5pt }, fill: c-text, role),
-      align(right, label-mono(period, size: 6.6pt)),
+      columns: (3.1cm, 1fr),
+      gutter: 6pt,
+      align(right + horizon, label-mono(category, size: 6.5pt)),
+      stack(
+        dir: ltr,
+        spacing: 2.5pt,
+        ..items.map(i => tag(i)),
+      ),
     )
-    // Line 2: Company & Location
-    #v(0.8pt)
-    #grid(
-      columns: (1fr, auto),
-      text(fill: c-accent, weight: "medium", size: if compact { 7.8pt } else { 8.6pt }, company),
-      if location != "" { align(right, text(fill: c-muted, size: 7.2pt, location)) },
-    )
-    // Bullets
-    #v(if compact { 1.5pt } else { 2.5pt })
-    #body
   ]
 }
 
-// ── Project Entry ────────────────────────────────────────────────────────────
+// ── Project Entry (Page 1) ───────────────────────────────────────────────────
 
 #let project-entry(
   name: "",
   url: "",
   tagline: "",
   tags: (),
-  compact: true,
   body,
 ) = {
-  block(width: 100%, below: if compact { 4.5pt } else { 6.5pt })[
-    // Line 1: Title link + tags
+  block(width: 100%, below: 4.5pt)[
     #grid(
       columns: (1fr, auto),
       stack(
         dir: ltr,
         spacing: 5pt,
         if url != "" {
-          link("https://" + url, text(weight: "bold", size: if compact { 8.7pt } else { 9.5pt }, fill: c-accent, name))
+          link("https://" + url, text(weight: "bold", size: 8.7pt, fill: c-accent, name))
         } else {
-          text(weight: "bold", size: if compact { 8.7pt } else { 9.5pt }, fill: c-text, name)
+          text(weight: "bold", size: 8.7pt, fill: c-text, name)
         },
         if url != "" {
           text(font: font-mono, size: 7pt, fill: c-muted, "↗")
@@ -251,58 +260,34 @@
         ]
       },
     )
-    // Line 2: Tagline
     #if tagline != "" [
-      #v(1pt)
+      #v(0.8pt)
       #block(width: 100%)[
-        #text(fill: c-muted, size: if compact { 7.5pt } else { 8.2pt }, style: "italic", tagline)
+        #text(fill: c-muted, size: 7.5pt, style: "italic", tagline)
       ]
     ]
-    // Line 3: Description Body
-    #v(if compact { 1.2pt } else { 2pt })
+    #v(1pt)
     #block(width: 100%)[
       #body
     ]
   ]
 }
 
-// ── Skill Group Entry ────────────────────────────────────────────────────────
-
-#let skill-group(
-  category,
-  items,
-  compact: true,
-) = {
-  block(width: 100%, below: if compact { 2.5pt } else { 3.5pt })[
-    #grid(
-      columns: (if compact { 2.1cm } else { 2.5cm }, 1fr),
-      gutter: 5pt,
-      align(right + horizon, label-mono(category, size: 6.5pt)),
-      stack(
-        dir: ltr,
-        spacing: 2.5pt,
-        ..items.map(i => tag(i)),
-      ),
-    )
-  ]
-}
-
-// ── Education Entry ──────────────────────────────────────────────────────────
+// ── Education Entry (Page 1) ─────────────────────────────────────────────────
 
 #let edu-entry(
   degree: "",
   institution: "",
   period: "",
   note: "",
-  compact: true,
 ) = {
-  block(width: 100%, below: if compact { 2.5pt } else { 4pt })[
+  block(width: 100%, below: 3pt)[
     #grid(
       columns: (1fr, auto),
       stack(
         spacing: 1.2pt,
-        text(weight: "bold", size: if compact { 8.6pt } else { 9.3pt }, fill: c-text, degree),
-        text(fill: c-accent, weight: "medium", size: if compact { 7.8pt } else { 8.5pt }, institution),
+        text(weight: "bold", size: 8.5pt, fill: c-text, degree),
+        text(fill: c-accent, weight: "medium", size: 7.8pt, institution),
         if note != "" { text(fill: c-muted, size: 7.2pt, note) },
       ),
       align(right + top, label-mono(period, size: 6.6pt)),
@@ -310,101 +295,120 @@
   ]
 }
 
-// ── Section Renderers for Modular Composition ────────────────────────────────
+// ── Awards Grid (Page 1) ─────────────────────────────────────────────────────
 
-#let render-section-profile(summary, compact: true, number: "00") = {
-  section(number: number, title: "Profile", compact: compact)[
-    #summary
-  ]
-}
-
-#let render-section-experience(items, compact: true, number: "01", view: "swe") = {
-  section(number: number, title: "Experience", compact: compact)[
-    #for exp in items [
-      #let role-title = if view == "pm" and "role-pm" in exp { exp.role-pm } else { exp.role }
-      #let bullets = if view == "pm" {
-        if compact and "bullets-pm-compact" in exp { exp.bullets-pm-compact } else { exp.bullets-pm }
-      } else {
-        if compact and "bullets-swe-compact" in exp { exp.bullets-swe-compact } else { exp.bullets-swe }
-      }
-      #entry(
-        role: role-title,
-        company: exp.company,
-        period: exp.period,
-        location: exp.location,
-        compact: compact,
-      )[
-        #list(..bullets)
-      ]
-    ]
-  ]
-}
-
-#let render-section-projects(items, compact: true, number: "02", view: "swe") = {
-  let section-name = if view == "pm" { "Notable Work" } else { "Projects" }
-  section(number: number, title: section-name, compact: compact)[
-    #for p in items [
-      #let body = if view == "pm" {
-        if compact and "body-pm-compact" in p { p.body-pm-compact } else { p.body-pm }
-      } else {
-        if compact and "body-swe-compact" in p { p.body-swe-compact } else { p.body-swe }
-      }
-      #if body != [] and body != "" [
-        #project-entry(
-          name: p.name,
-          url: p.url,
-          tagline: p.tagline,
-          tags: p.tags,
-          compact: compact,
-        )[
-          #body
-        ]
-      ]
-    ]
-  ]
-}
-
-#let render-section-skills(skills, compact: true, number: "03") = {
-  section(number: number, title: "Skills", compact: compact)[
-    #for (cat, items) in skills [
-      #skill-group(cat, items, compact: compact)
-    ]
-  ]
-}
-
-#let render-section-education(items, compact: true, number: "04") = {
-  section(number: number, title: "Education", compact: compact)[
-    #for edu in items [
-      #edu-entry(
-        degree: edu.degree,
-        institution: edu.institution,
-        period: edu.period,
-        note: edu.note,
-        compact: compact,
+#let awards-grid(items) = {
+  grid(
+    columns: (1fr, 1fr),
+    row-gutter: 3pt,
+    column-gutter: 10pt,
+    ..items.map(award => {
+      let (place, title, year) = award
+      grid(
+        columns: (auto, 1fr, auto),
+        gutter: 4pt,
+        align: (left + horizon, left + horizon, right + horizon),
+        tag(place),
+        text(size: 7.6pt, weight: "medium", fill: c-body, title),
+        label-mono(year, size: 6.5pt),
       )
+    })
+  )
+}
+
+// ── Experience Entry (Page 2) ────────────────────────────────────────────────
+
+#let experience-entry(
+  role: "",
+  company: "",
+  period: "",
+  location: "",
+  desc: "",
+  tech: "",
+  body,
+) = {
+  block(width: 100%, below: 4.2pt)[
+    // Line 1: Role & Period
+    #grid(
+      columns: (1fr, auto),
+      text(weight: "bold", size: 8.8pt, fill: c-text, role),
+      align(right, label-mono(period, size: 6.6pt)),
+    )
+    // Line 2: Company & Location
+    #v(0.6pt)
+    #grid(
+      columns: (1fr, auto),
+      text(fill: c-accent, weight: "semibold", size: 7.9pt, company),
+      if location != "" { align(right, text(fill: c-muted, size: 7.1pt, location)) },
+    )
+    // Line 3: Short Scope (if available)
+    #if desc != "" [
+      #v(0.5pt)
+      #block(width: 100%)[
+        #text(fill: c-muted, size: 7.3pt, style: "italic", desc)
+      ]
+    ]
+    // Bullets
+    #v(1.2pt)
+    #body
+    // Line 4: Tech Stack
+    #if tech != "" [
+      #v(1pt)
+      #block(width: 100%)[
+        #label-mono("TECH: ", size: 6pt, fill: c-muted)
+        #text(font: font-mono, size: 6.6pt, fill: c-body, tech)
+      ]
     ]
   ]
 }
 
-// ── Orchestration Engine ─────────────────────────────────────────────────────
+// ── Certification Card Grid (Page 2 Footer) ──────────────────────────────────
 
-#let render-resume(
+#let cert-grid(items) = {
+  block(
+    width: 100%,
+    breakable: false,
+    grid(
+      columns: (1fr, 1fr, 1fr),
+      gutter: 6pt,
+      ..items.map(c => block(
+        fill: c-tag-bg,
+        stroke: 0.4pt + c-tag-border,
+        inset: (x: 5.5pt, y: 4pt),
+        radius: 3pt,
+        width: 100%,
+        stack(
+          spacing: 1.5pt,
+          text(weight: "bold", size: 7.4pt, fill: c-text, c.title),
+          text(fill: c-accent, weight: "medium", size: 6.8pt, c.issuer + " · " + c.date),
+          text(fill: c-muted, size: 6.6pt, c.detail),
+        )
+      ))
+    )
+  )
+}
+
+// ── Complete 2-Page Resume Orchestrator ───────────────────────────────────────
+
+#let render-two-page-resume(
   data,
   view: "swe", // "swe" | "pm"
-  compact: true,
-  section-order: ("profile", "experience", "projects", "skills", "education"),
   title: auto,
 ) = {
   let resume-title = if title != auto {
     title
   } else if view == "pm" {
-    "Technical Product Manager · Systems & Architecture"
+    "Technical Product Manager · Systems Architecture & Digital Products"
   } else {
-    "Senior Software Engineer · Systems Architecture"
+    "Senior Software Engineer · Systems Architecture & Financial Ledgers"
   }
 
   let summary = if view == "pm" { data.summary-pm } else { data.summary-swe }
   let skills = if view == "pm" { data.skills-pm } else { data.skills-swe }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 1: EXECUTIVE BRIEFING, HOT SKILLS & ARSENAL
+  // ═══════════════════════════════════════════════════════════════════════════
 
   resume-header(
     name: data.name,
@@ -415,27 +419,90 @@
     linkedin: data.linkedin,
     github: data.github,
     website: data.website,
-    compact: compact,
   )
 
-  let idx = 0
-  for sec in section-order [
-    #let num = "0" + str(idx)
-    #if sec == "profile" {
-      render-section-profile(summary, compact: compact, number: num)
-      idx = idx + 1
-    } else if sec == "experience" {
-      render-section-experience(data.experience, compact: compact, number: num, view: view)
-      idx = idx + 1
-    } else if sec == "projects" {
-      render-section-projects(data.projects, compact: compact, number: num, view: view)
-      idx = idx + 1
-    } else if sec == "skills" {
-      render-section-skills(skills, compact: compact, number: num)
-      idx = idx + 1
-    } else if sec == "education" {
-      render-section-education(data.education, compact: compact, number: num)
-      idx = idx + 1
-    }
+  // 00 / PROFILE
+  section(number: "00", title: "Profile", above: 4.5pt, below: 4.5pt)[
+    #summary
+  ]
+
+  // 01 / CORE ARSENAL & HOT SKILLS
+  section(number: "01", title: "Core Arsenal", above: 4.5pt, below: 4.5pt)[
+    #for (cat, items) in skills [
+      #skill-group(cat, items)
+    ]
+  ]
+
+  // 02 / NOTABLE PRODUCTS & OPEN SOURCE
+  let project-section-name = if view == "pm" { "Products & Ops" } else { "Notable Tools" }
+  section(number: "02", title: project-section-name, above: 4.5pt, below: 4.5pt)[
+    #for p in data.projects [
+      #let body = if view == "pm" { p.body-pm } else { p.body-swe }
+      #project-entry(
+        name: p.name,
+        url: p.url,
+        tagline: p.tagline,
+        tags: p.tags,
+      )[
+        #body
+      ]
+    ]
+  ]
+
+  // 03 / EDUCATION
+  section(number: "03", title: "Education", above: 4.5pt, below: 4pt)[
+    #for edu in data.education [
+      #edu-entry(
+        degree: edu.degree,
+        institution: edu.institution,
+        period: edu.period,
+        note: edu.note,
+      )
+    ]
+  ]
+
+  // 04 / HONORS & AWARDS
+  section(number: "04", title: "Honors", above: 4pt, below: 2pt)[
+    #awards-grid(data.awards)
+  ]
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE BREAK: MOVE TO EXPERIENCE DOSSIER
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  pagebreak()
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PAGE 2: IN-DEPTH PROFESSIONAL EXPERIENCE DOSSIER & CERTIFICATIONS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  page-runner(
+    name: data.name,
+    title: if view == "pm" { "PRODUCT & SYSTEMS EXPERIENCE DOSSIER" } else { "PROFESSIONAL EXPERIENCE DOSSIER" },
+    email: data.email,
+    website: data.website,
+  )
+
+  // 05 / DETAILED WORK EXPERIENCE
+  section(number: "05", title: "Experience", above: 3pt, below: 5pt)[
+    #for exp in data.experience [
+      #let role-title = if view == "pm" and "role-pm" in exp { exp.role-pm } else { exp.role }
+      #let bullets = if view == "pm" { exp.bullets-pm } else { exp.bullets-swe }
+      #experience-entry(
+        role: role-title,
+        company: exp.company,
+        period: exp.period,
+        location: exp.location,
+        desc: exp.desc,
+        tech: exp.tech,
+      )[
+        #list(..bullets)
+      ]
+    ]
+  ]
+
+  // 06 / CERTIFICATIONS
+  section(number: "06", title: "Credentials", above: 4pt, below: 0pt)[
+    #cert-grid(data.certifications)
   ]
 }
