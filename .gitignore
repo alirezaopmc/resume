@@ -1,7 +1,11 @@
 output/*.png
 output/*.log
 output/*.tmp
+output/*.json
 v6.1-extracted.txt
+
+# open-ATS binary downloaded by `make ats`
+tools/ats/bin/
 
 # Environment / OS
 .DS_Store

@@ -19,6 +19,7 @@
 #let c-section-bg = rgb("f8fafc") // section label bg
 
 #let font-body = ("Inter", "Liberation Sans")
+#let font-display = ("Source Serif 4", "Liberation Serif")
 #let font-mono = ("JetBrains Mono", "Liberation Mono")
 
 // ── Typography Helpers ───────────────────────────────────────────────────────
@@ -105,6 +106,7 @@
   status: "",
   location: "",
   email: "",
+  phone: "",
   linkedin: "",
   github: "",
   website: "",
@@ -149,6 +151,9 @@
     align(right + top)[
       #stack(
         spacing: 2.5pt,
+        if phone != "" {
+          link("tel:" + phone.replace(" ", ""), text(font: font-mono, size: 7.2pt, fill: c-accent, phone))
+        },
         if email != "" {
           link("mailto:" + email, text(font: font-mono, size: 7.2pt, fill: c-accent, email))
         },
@@ -436,6 +441,7 @@
     status: data.status,
     location: data.location,
     email: data.email,
+    phone: data.phone,
     linkedin: data.linkedin,
     github: data.github,
     website: data.website,
@@ -516,7 +522,7 @@
 
   // 05 / DETAILED WORK EXPERIENCE
   section(number: "05", title: "Experience", above: 2pt, below: 3pt, show-rule: false)[
-    #for exp in data.experience [
+    #for exp in (..data.experience, ..data.other-experience) [
       #let role-title = if view == "pm" and "role-pm" in exp { exp.role-pm } else { exp.role }
       #let bullets = if view == "pm" { exp.bullets-pm } else { exp.bullets-swe }
       #experience-entry(
@@ -536,4 +542,231 @@
   section(number: "06", title: "Credentials", above: 4pt, below: 0pt, show-rule: false)[
     #cert-grid(data.certifications)
   ]
+}
+
+// ── SWE edition: single column, scan band, 10 pt ────────────────────────────
+// PM keeps resume-doc + render-two-page-resume. See docs/decisions/001.
+
+#let swe-title = "Senior Back-End Software Engineer"
+
+#let resume-doc-swe(title: swe-title, body) = {
+  set page(
+    paper: "a4",
+    margin: (x: 1.4cm, top: 1.3cm, bottom: 1.3cm),
+    header-ascent: 0.5em,
+    header: context {
+      if counter(page).get().first() > 1 {
+        set text(font: font-body, size: 10pt, fill: c-muted)
+        block(below: 2pt, width: 100%)[
+          Alireza Jafartash · #title
+          #v(2pt)
+          #line(length: 100%, stroke: 0.4pt + c-rule)
+        ]
+      }
+    },
+  )
+
+  set text(
+    font: font-body,
+    size: 10pt,
+    fill: c-body,
+    lang: "en",
+    hyphenate: false,
+  )
+
+  set par(
+    leading: 0.42em,
+    spacing: 0.5em,
+    justify: false,
+  )
+
+  set list(
+    indent: 0.5em,
+    body-indent: 0.35em,
+    spacing: 0.26em,
+    marker: text(fill: c-text)[-],
+  )
+
+  show heading.where(level: 1): it => {
+    block(width: 100%, above: 9pt, below: 5pt, breakable: false, sticky: true)[
+      #stack(
+        dir: ttb,
+        spacing: 2.5pt,
+        text(font: font-display, size: 12pt, weight: "bold", fill: c-text, it.body),
+        line(length: 100%, stroke: 0.7pt + c-accent),
+      )
+    ]
+  }
+
+  show link: set text(fill: c-accent)
+
+  body
+}
+
+#let swe-header(
+  name: "",
+  title: "",
+  email: "",
+  phone: "",
+  linkedin: "",
+  github: "",
+  website: "",
+  location: "",
+) = {
+  block(width: 100%, below: 4pt)[
+    #text(font: font-display, size: 22pt, weight: "bold", fill: c-text, tracking: -0.02em, name)
+    #v(2pt)
+    #text(font: font-display, size: 12pt, weight: "semibold", fill: c-accent, title)
+    #v(2pt)
+    #text(font: font-body, size: 10pt, fill: c-muted, location)
+    #v(2pt)
+    #text(font: font-body, size: 10pt, fill: c-body)[
+      #if phone != "" [
+        #link("tel:" + phone.replace(" ", ""))[#phone]
+        #h(0.4em) · #h(0.4em)
+      ]
+      #link("mailto:" + email)[#email]
+      #h(0.4em) · #h(0.4em)
+      #link("https://" + website)[#website]
+      #linebreak()
+      #link("https://" + github)[#github]
+      #h(0.4em) · #h(0.4em)
+      #link("https://" + linkedin)[#linkedin]
+    ]
+    #v(5pt)
+    #line(length: 100%, stroke: 1pt + c-accent)
+  ]
+}
+
+#let swe-role(
+  role: "",
+  company: "",
+  period: "",
+  location: "",
+  workplace: "",
+  employment: "",
+  tech: "",
+  bullets: (),
+) = {
+  // Three explicit blocks instead of one paragraph with line breaks. Each gap is
+  // set on its own block, so the meta line and the first bullet never touch.
+  // The header is sticky, so a page never ends on a title.
+  block(width: 100%, above: 9pt, below: 0pt, breakable: false, sticky: true)[
+    #stack(
+      dir: ttb,
+      spacing: 2pt,
+      text(font: font-display, size: 11pt, weight: "bold", fill: c-text, role),
+      text(font: font-body, size: 10pt, weight: "semibold", fill: c-accent, company),
+      text(font: font-body, size: 10pt, fill: c-muted)[
+        #period
+        #if location != "" [ · #location]
+        #if workplace != "" [ · #workplace]
+        #if employment != "" [ · #employment]
+      ],
+    )
+  ]
+  block(width: 100%, above: 5pt, below: 0pt)[#list(..bullets)]
+  if tech != "" {
+    block(width: 100%, above: 5pt, below: 0pt)[
+      #text(size: 10pt, fill: c-muted)[Tools: ]
+      #text(size: 10pt, fill: c-body, tech)
+    ]
+  }
+}
+
+// `title`, `summary`, and `skills-scan` let an edition overlay replace the
+// posting-specific lines. The defaults are the general SWE edition (ADR-001).
+#let render-swe-resume(
+  data,
+  title: swe-title,
+  summary: auto,
+  skills-scan: auto,
+) = {
+  swe-header(
+    name: data.name,
+    title: title,
+    email: data.email,
+    phone: data.phone,
+    linkedin: data.linkedin,
+    github: data.github,
+    website: data.website,
+    location: data.location,
+  )
+
+  [= Summary]
+  if summary == auto { data.summary-swe } else { summary }
+
+  // Categorized list: each group is (label, items). Skills sits under Summary
+  // so the scan band shows the stack before the roles.
+  [= Skills]
+  let groups = if skills-scan == auto { data.skills-swe-scan } else { skills-scan }
+  list(..groups.map(((label, items)) => [#strong[#label:] #items]))
+
+  let roles(list) = for exp in list {
+    swe-role(
+      role: exp.role,
+      company: exp.company,
+      period: exp.period,
+      location: exp.location,
+      workplace: exp.at("workplace", default: ""),
+      employment: exp.at("employment", default: ""),
+      tech: exp.tech,
+      bullets: exp.bullets-swe,
+    )
+  }
+
+  [= Work Experience]
+  roles(data.experience)
+
+  [= Other Experience]
+  roles(data.other-experience)
+
+  [= Education]
+  for edu in data.education {
+    block(width: 100%, above: 6pt, below: 1pt)[
+      #text(font: font-display, size: 11pt, weight: "bold", fill: c-text, edu.degree)
+      #linebreak()
+      #text(fill: c-accent, weight: "semibold", edu.institution)
+      #h(0.4em)
+      #text(fill: c-muted)[· #edu.period]
+      #if edu.note != "" [
+        #linebreak()
+        #text(fill: c-body, edu.note)
+      ]
+    ]
+  }
+
+  [= Projects]
+  for p in data.projects {
+    block(width: 100%, above: 6pt, below: 1pt)[
+      #if p.url != "" [
+        #link("https://" + p.url)[#text(font: font-display, size: 11pt, weight: "bold", fill: c-accent, p.name)]
+      ] else {
+        text(font: font-display, size: 11pt, weight: "bold", fill: c-text, p.name)
+      }
+      #if p.tagline != "" [
+        #linebreak()
+        #text(style: "italic", fill: c-muted, p.tagline)
+      ]
+      #v(2pt)
+      #p.body-swe
+      #if p.tags.len() > 0 [
+        #v(1pt)
+        #text(fill: c-muted, p.tags.join(", "))
+      ]
+    ]
+  }
+
+  [= Awards & Certifications]
+  stack(
+    dir: ttb,
+    spacing: 3pt,
+    ..data.awards.map(((place, name, date)) => [
+      #text(weight: "bold", fill: c-text, place)
+      #h(0.35em)
+      #text(fill: c-body, name)
+      #h(0.35em)
+      #text(fill: c-muted)[(#date)]
+    ]),
+  )
 }

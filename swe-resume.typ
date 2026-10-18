@@ -1,15 +1,13 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// swe-resume.typ — Senior Software Engineer (Two-Page Executive Dossier)
-// Page 1: Profile & Core Arsenal (Hot Skills) · Featured Tools · Education · Honors
-// Page 2: Detailed Professional Experience Dossier (Financial Ledgers, Systems)
-// ─────────────────────────────────────────────────────────────────────────────
+// Senior Back-End Software Engineer resume.
+// Page 1: header, summary, skills, and the recent roles.
+// Later pages: the rest of the experience, education, projects, and awards.
+// The PM edition does not use this file.
 
-#import "lib/resume.typ": resume-doc, render-two-page-resume
+#import "lib/resume.typ": resume-doc-swe, render-swe-resume, swe-title
 #import "data/profile.typ" as profile
 
-#show: resume-doc
+#set document(title: "Alireza Jafartash — " + swe-title, author: "Alireza Jafartash")
 
-#render-two-page-resume(
-  profile,
-  view: "swe",
-)
+#show: resume-doc-swe
+
+#render-swe-resume(profile)

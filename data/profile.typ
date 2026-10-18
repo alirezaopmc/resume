@@ -5,23 +5,24 @@
 // ── Contact & Identity ───────────────────────────────────────────────────────
 
 #let name     = "Alireza Jafartash"
-#let email    = "alirezaopmc@gmail.com" // User strictly specified: only this email
+#let email    = "alirezaopmc@gmail.com" // Only this address. Do not add a university mailbox.
+#let phone    = "+98 938 872 7940"
 #let linkedin = "linkedin.com/in/alirezaopmc"
 #let github   = "github.com/alirezaopmc"
 #let website  = "jtash.ir"
-#let location = "Tehran, Iran · Remote"
+#let location = "Tehran, Iran | Open to Remote"
 #let status   = "Open to Senior SWE & Staff / Technical PM roles"
 
 // ── Profile Summaries ────────────────────────────────────────────────────────
 
 #let summary-swe = [
-  8+ years engineering high-throughput transaction backends, multi-tenant B2B2C platforms, and mission-critical financial ledgers across Go, Java (Spring Boot), TypeScript, and PostgreSQL.
-  Currently pursuing M.Sc. in Algorithms & Computation at University of Tehran — combining deep systems thinking with pragmatic product ownership.
+  Back-end engineer with 4+ years of production experience, working across different technologies, programming languages, databases, paradigms, and products. Builds concurrency-safe financial systems, high-throughput APIs, and real-time data pipelines, and also builds front ends for full-stack products. M.Sc. candidate in Computer Engineering.
 ]
 
 #let summary-pm = [
-  Technical PM bridging business strategy, user discovery, and engineering execution across fintech, gaming, and AI tooling domains.
-  Maps ambiguous business problems (OTC gold trading, crypto exchanges, multi-tenant SaaS) into precise product specs and intuitive user experiences — fluent in both Figma and distributed systems architecture.
+  Programming since 2014, from game development to competitive programming and olympiads, which built the problem-solving habits still used daily.
+  Startup work since 2022 turns ambiguous business problems into product specs and user flows across fintech, crypto exchanges, gaming, and AI tooling, backed by distributed systems work in Figma and multi-tenant architecture.
+  Current focus: spec-driven development and agentic and knowledge-retrieval systems, using AI to automate repetitive work so time goes to architecture and product decisions.
 ]
 
 // ── Hot Skills Inventory (Featured on Page 1) ────────────────────────────────
@@ -31,7 +32,16 @@
   ("Systems & Ledgers",    ("High-Throughput Ledgers", "Multi-Tenant B2B2C", "Concurrency & Locks", "Double-Entry Accounting", "Kafka", "RabbitMQ")),
   ("Databases & Cache",    ("PostgreSQL", "Redis (Geospatial & Time-Series)", "Liquibase", "Drizzle ORM", "Query Optimization")),
   ("Cloud, Infra & IaC",   ("Google Cloud Platform (GCP)", "Docker", "Kubernetes", "Terraform", "Cloudflare Workers", "Bitbucket / GitHub CI/CD")),
-  ("Architecture & AI",    ("Microservices", "Clean Architecture", "Agentic AI CLI Multiplexing", "REST & GraphQL APIs", "Typst")),
+  ("Architecture & AI",    ("Microservices", "Clean Architecture", "SOLID Principles", "Agentic AI CLI Multiplexing", "REST & GraphQL APIs", "Typst")),
+  ("Engineering Practice", ("Code Review", "Object-Oriented Design", "Design Patterns")),
+)
+
+// Categorized Skills block printed under Summary. Each pair is (label, items).
+// Every item must also appear in a role, project, or education entry below,
+// or in the skills inventory above. Role `tech` strings carry the wider set.
+#let skills-swe-scan = (
+  ("Primary",  "Go (Golang), Python (Django), Java 21 (Spring Boot 3), TypeScript (NestJS, Next.js, React, Node.js), PostgreSQL (High Availability, Replication, Partitioning, Query Optimization), Redis, Apache Kafka, RabbitMQ, REST, Docker, Clean Architecture, SOLID, Concurrency Control"),
+  ("Familiar", "Kotlin, MongoDB, GraphQL, API Gateways & Rate Limiting, Kubernetes, Terraform, GCP, Linux, CI/CD, Prometheus, Grafana, Liquibase"),
 )
 
 #let skills-pm = (
@@ -61,14 +71,14 @@
   (
     id:       "manova-orbit",
     name:     "Manova / Orbit Platform",
-    url:      "manova.space",
-    tagline:  "Standardized foundation platform for AI-native and client microservices.",
+    url:      "",
+    tagline:  "Shared foundation for client products: auth, limits, billing, and tenant isolation.",
     tags:     ("TypeScript", "Go", "PostgreSQL", "Edge"),
     body-swe: [
-      Production micro-platform providing unified RBAC authentication, token-bucket rate-limiting, double-entry payment verification, and multi-tenant DB partitions across 5+ client applications.
+      Shared micro-platform for client products, with RBAC, token-bucket rate limits, billing journals, and partitioned PostgreSQL for multi-tenant isolation across 5+ applications.
     ],
     body-pm: [
-      Managed Orbit as a platform-as-a-product: extracted recurring client requirements into a shared, composable toolkit that accelerated client project time-to-market by 4x.
+      Managed the platform as a product: extracted recurring client requirements into a shared toolkit that accelerated client project time-to-market by 4x.
     ],
   ),
   (
@@ -84,103 +94,57 @@
       Identified the severe tooling gap in bilingual document generation; designed clean API contracts and comprehensive documentation for academic and enterprise adoption.
     ],
   ),
-  (
-    id:       "distributed-uuid",
-    name:     "Distributed UUID Generation System",
-    url:      "github.com/alirezaopmc",
-    tagline:  "High-throughput distributed 32-byte UUID generation platform.",
-    tags:     ("Go", "RabbitMQ", "Hetzner Cloud"),
-    body-swe: [
-      Engineered a distributed ID generation system capable of producing collision-free 32-byte UUIDs under massive concurrent request volumes, with automated node coordination.
-    ],
-    body-pm: [
-      Undergraduate thesis project at Babol Noshirvani University of Technology, demonstrating end-to-end systems architecture and benchmarking under distributed loads.
-    ],
-  ),
 )
 
 // ── Academic Background (Featured on Page 1) ─────────────────────────────────
 
 #let education = (
   (
-    degree:      "Master of Computer Engineering — Algorithms and Computation",
+    degree:      "M.Sc. in Computer Engineering — Algorithms and Computation",
     institution: "University of Tehran",
-    period:      "2024 — Present",
-    note:        "Head Teaching Assistant for Advanced Programming · Research in distributed algorithms",
+    period:      "Sep 2024–Present",
+    note:        [Research focus: Distributed algorithms and fault-tolerant coordination.],
   ),
   (
-    degree:      "Bachelor of Computer Engineering",
+    degree:      "B.Sc. in Computer Engineering",
     institution: "Babol Noshirvani University of Technology",
-    period:      "2018 — 2024",
-    note:        "Final Project: Distributed UUID Generation System",
+    period:      "Sep 2018–Aug 2024",
+    note:        [Thesis: _High-Throughput Distributed UUID Generation System_ — Engineered a collision-free 128-bit (16-byte) distributed ID generator in Go and RabbitMQ sustaining 10,000,000 IDs/sec per node with automated node coordination.],
   ),
 )
 
 // ── Honors & Awards (Featured on Page 1) ─────────────────────────────────────
 
+// Awards and certifications share one list. Each entry is (place, title, date).
 #let awards = (
-  ("2nd Place",  "Golang (Bale) Software Engineering Selection", "2023"),
-  ("Top 20",     "DevOps (Digikala) Boot Camp Selection",         "2022"),
-  ("Top 30",     "CyberSecurity (Quera) Competition",            "2023"),
-  ("Top 30",     "Software Engineering (Digikala) Bootcamp",      "2022"),
-  ("Top 20",     "DiffCode (Quera) Algorithmic Contest",          "2019"),
-  ("Top 300",    "Codeforces Round 611 (Div. 3)",                 "2019"),
+  ("2nd Place",    "Golang Software Engineering Selection — Bale",                                  "2023"),
+  ("Top 20",       "DevOps Boot Camp Selection — Digikala",                                         "2022"),
+  ("Top 30",       "CyberSecurity Competition & Advanced Banking Security Workshop — Quera",        "2023"),
+  ("Top 30",       "Software Engineering Bootcamp (Backend, APIs, DB Architecture) — Digikala",    "Sep 2022"),
+  ("Top 20",       "DiffCode Algorithmic Contest — Quera",                                         "2019"),
+  ("Certificate",  "Machine Learning Specialization — DeepLearning.AI",                            "Mar 2023"),
 )
 
-// ── Detailed Work Experience (Featured on Page 2) ────────────────────────────
+// ── Detailed Work Experience ─────────────────────────────────────────────────
+// `concurrent` records a date overlap. The SWE renderer does not print it.
 
 #let experience = (
   (
-    company:  "Independent / Enterprise Clients",
-    role:     "Lead Systems Architect (Freelance)",
-    role-pm:  "Technical Product Consultant (Freelance)",
+    company:  "Independent",
+    role:     "Consultant and Lead Back-End Developer",
+    role-pm:  "Consultant and Developer",
     location: "Tehran",
-    period:   "2025 — Present",
-    desc:     "Architecting mission-critical platforms and automations for enterprise businesses.",
-    tech:     "Next.js 16 · React 19 · NestJS · Bun · PostgreSQL · Tailwind 4 · Redis",
+    period:   "2025–Present",
+    concurrent: true,
+    desc:     "Consulting and development for local businesses.",
+    tech:     "Go, NestJS, PostgreSQL, Redis, Next.js, React, Bun",
     bullets-swe: (
-      "Architected Goldstein: multi-tenant SaaS gold trading platform with double-entry wallet accounting, real-time OTC desk transfers, and automated 750-fineness normalization.",
-      "Engineered multi-branch Restaurant Inventory Management System: real-time stock ledger, automated supplier purchase orders, and recipe yield tracking.",
+      "Built an early-stage multi-currency trading SaaS for a few jewelry merchants as a full-stack NestJS and Next.js product, with integer minor-unit arithmetic, pessimistic row locks, and an append-only journal so concurrent orders never oversell stock, processing 10,000 daily transactions with zero balance drift.",
+      "Built a full-stack multi-site kitchen inventory system with a single authoritative ledger for intake, transfers, waste, and usage across freezers, prep lines, and ambient stock for multiple sites, plus a notification system and monitoring and tracking across all sites.",
     ),
     bullets-pm: (
-      "Conducted on-site discovery with traditional jewelers and OTC merchants to map legacy settlement workflows into Goldstein's digital multi-tenant UX.",
-      "Led UI/UX design of Goldstein's staff interface (`@goldstein/ui`), cutting transaction record time by 60% for non-technical retail store clerks.",
-    ),
-  ),
-
-  (
-    company:  "Manova",
-    role:     "Founder & Lead Systems Engineer",
-    role-pm:  "Founder & Product Lead",
-    location: "Remote",
-    period:   "2024 — Present",
-    desc:     "AI workflows, shared platform engineering, and client infrastructure.",
-    tech:     "Go · TypeScript · Bun · PostgreSQL · Docker · Cloudflare Workers · Typst",
-    bullets-swe: (
-      "Architected Orbit: shared micro-platform powering all client products with unified RBAC auth, token-bucket rate limiting, billing journals, and multi-tenant provisioning.",
-      "Engineered Promux: zero-downtime agentic CLI multiplexer with automated account rotation on 429/500 errors and state preservation.",
-    ),
-    bullets-pm: (
-      "Spearheaded product vision for Manova's internal platforms, scaling modular toolkits to accelerate client time-to-market by 4x.",
-      "Conducted developer workflow discovery to identify AI engineering bottlenecks, directly driving the requirements and delivery of Promux.",
-    ),
-  ),
-
-  (
-    company:  "University of Tehran — Dept. of Science",
-    role:     "Head Teaching Assistant — Advanced Programming",
-    role-pm:  "Head TA & Course Coordinator",
-    location: "Tehran",
-    period:   "2024 — Present",
-    desc:     "Leading teaching staff and curriculum infrastructure for competitive CS engineering course.",
-    tech:     "Java · Automated Judging CI · Docker · Concurrency · OOP Design Patterns",
-    bullets-swe: (
-      "Manage and coordinate a team of 15+ TAs responsible for problem design, grading, and curriculum delivery for 200+ students per semester.",
-      "Designed and maintain the automated containerized judge system and assignment evaluation toolchain used across all terms.",
-    ),
-    bullets-pm: (
-      "Manage cross-functional TA team of 15 members; define semester roadmaps, assignment delivery schedules, and evaluation standards.",
-      "Gather continuous student feedback to iterate on problem difficulty curves, improving project completion rates and assignment clarity.",
+      "Consulted jewelry stores on moving in-person settlement onto a shared trading, wallet, and settlement flow.",
+      "Scoped a phone-first kitchen inventory flow for staff who work quickly and with wet or gloved hands.",
     ),
   ),
 
@@ -188,13 +152,16 @@
     company:  "LvtGames",
     role:     "Software Engineer",
     role-pm:  "Software Engineer & Feature Owner",
-    location: "Turkiye (Remote)",
-    period:   "Aug 2024 — 2025",
+    location: "Istanbul, Türkiye",
+    workplace: "Remote",
+    employment: "Full-time",
+    period:   "Aug 2025–Mar 2026",
+    concurrent: true,
     desc:     "High-concurrency gaming and entertainment platform.",
-    tech:     "Java 21 · Spring Boot 3 · Go 1.24 · PostgreSQL · Redis · GCP · Terraform · Liquibase",
+    tech:     "Go 1.24, Java 21, Spring Boot 3, PostgreSQL, Redis, GCP, Terraform, Liquibase",
     bullets-swe: (
-      "Engineered high-throughput transaction processing and multi-balance wallet management on a multi-tenant B2B2C entertainment platform.",
-      "Operated GCP infrastructure via Terraform IaC, built Bitbucket caching CI/CD pipelines, and led cross-functional feature launches as Product Manager.",
+      "Built high-throughput transaction processing and multi-balance wallet services in Go 1.24 and Spring Boot 3 (Java 21) for a multi-tenant B2B2C entertainment platform.",
+      "Provisioned GCP infrastructure with Terraform, implemented Bitbucket layer-cached CI/CD pipelines that cut deployment times by ~30%, and led cross-functional feature launches.",
     ),
     bullets-pm: (
       "Took full product and feature ownership of specific core platform features, acting as Product Manager.",
@@ -207,12 +174,14 @@
     role:     "Software Engineer",
     role-pm:  "Backend & Systems Engineer",
     location: "Tehran",
-    period:   "May 2025 — Jul 2025",
+    employment: "Full-time",
+    period:   "May 2025–Jul 2025",
+    concurrent: true,
     desc:     "Seamless crypto trading exchange and wallet platform.",
-    tech:     "Apache Kafka · Kotlin · Kubernetes · Spring Framework · PostgreSQL",
+    tech:     "Kotlin, Spring Framework, Apache Kafka, PostgreSQL, Kubernetes",
     bullets-swe: (
-      "Optimized high-throughput crypto exchange engine for low latency under peak concurrent loads; resolved complex concurrency race conditions to guarantee ledger integrity.",
-      "Designed and maintained key operational utility Telegram bot streamlining administrative and member workflows.",
+      "Resolved critical ledger concurrency race conditions and optimized the crypto exchange matching engine under peak load, reducing p99 execution latency.",
+      "Automated administrative and member operations by designing an event-driven Telegram workflow bot integrated with core exchange services.",
     ),
     bullets-pm: (
       "Managed feature design and user flows for crypto exchange trading features and wallet operations.",
@@ -224,13 +193,16 @@
     company:  "Ultratrader",
     role:     "Software Engineer",
     role-pm:  "Backend & Data Engineer",
-    location: "Tehran",
-    period:   "Feb 2024 — Oct 2024",
+    location: "Toronto, Canada",
+    workplace: "Remote",
+    employment: "Full-time",
+    period:   "Feb 2024–Oct 2024",
+    concurrent: false,
     desc:     "Smart trading journal & portfolio manager for financial markets.",
-    tech:     "NestJS · PostgreSQL · Redis · Docker · GraphQL",
+    tech:     "NestJS, TypeScript, PostgreSQL, Redis, GraphQL, Docker",
     bullets-swe: (
-      "Designed a high-throughput data preprocessing pipeline for streaming and normalizing high-volume financial market data across multiple broker APIs.",
-      "Developed high-performance REST/GraphQL APIs, implemented resilient broker proxy gateways, and optimized heavy analytical database queries.",
+      "Designed a real-time ingestion pipeline that streams and normalizes financial market data across 30+ external broker APIs at ~1,000 events/sec sustained, with bursts to 300k events/sec.",
+      "Built REST and GraphQL APIs alongside low-latency broker proxy gateways, and optimized analytical PostgreSQL queries to cut reporting latency by more than 90%.",
     ),
     bullets-pm: (
       "Collaborated with financial traders to translate portfolio analysis requirements into intuitive GraphQL query schemas.",
@@ -243,12 +215,13 @@
     role:     "Software Engineer",
     role-pm:  "Backend & Pipeline Engineer",
     location: "Tehran",
-    period:   "May 2022 — Dec 2023",
+    period:   "May 2022–Dec 2023",
+    concurrent: true,
     desc:     "Financial analysis platform for Tehran Stock Exchange.",
-    tech:     "Django · PostgreSQL · RabbitMQ · Docker · Prometheus · Grafana",
+    tech:     "Python, Django, PostgreSQL, RabbitMQ, Docker, Prometheus, Grafana",
     bullets-swe: (
-      "Processed high volumes of precise stock market tick data with optimized analytical ingestion pipelines and replicated PostgreSQL databases.",
-      "Developed microservices with RabbitMQ message queues and authored 20+ automated Lambda functions for data fetching with Prometheus/Grafana telemetry.",
+      "Ingested and processed stock-market tick data through high-throughput analytical pipelines backed by replicated PostgreSQL databases.",
+      "Developed event-driven microservices using Django and RabbitMQ across 20+ automated data-fetching workers, instrumented with Prometheus and Grafana alerting.",
     ),
     bullets-pm: (
       "Translated quantitative stock market analysis methodologies into automated data pipeline requirements.",
@@ -257,25 +230,71 @@
   ),
 
   (
-    company:  "Earlier Engineering: Plotset & Cubecraft",
-    role:     "Systems & R&D Engineer",
-    role-pm:  "R&D & Systems Engineer",
-    location: "California, US & London, UK (Remote)",
-    period:   "2016 — 2022",
-    desc:     "AI visual tools R&D and high-scale multiplayer game network engineering.",
-    tech:     "Node.js · D3.js · Java · SpigotMC API · MongoDB",
+    company:  "Plotset",
+    role:     "Research and Development Intern",
+    role-pm:  "Research and Development Intern",
+    location: "California, US",
+    workplace: "Remote",
+    period:   "Aug 2021–Jul 2022",
+    concurrent: true,
+    desc:     "Research on charting tools for non-technical users.",
+    tech:     "",
     bullets-swe: (
-      "Plotset (US): Researched AI-driven visualization solutions; architected unified framework integrating multiple charting engines.",
-      "Cubecraft (UK): Built minigame engine plugins for high-scale Minecraft network with 300+ event listeners and a 50+ state finite state machine.",
+      "Researched AI-driven data visualization and architected a modular rendering framework integrating multiple charting engines in Node.js and D3.js.",
     ),
     bullets-pm: (
-      "Plotset: Researched user workflows for data visualizers to simplify chart and map creation for non-technical users.",
-      "Cubecraft: Analyzed player engagement across minigame modes to optimize state transitions and game mechanics.",
+      "Researched user workflows for data visualizers to simplify chart and map creation for non-technical users.",
     ),
   ),
 )
 
-// ── Professional Certifications (Featured on Page 2) ─────────────────────────
+// ── Other Experience (teaching and academic roles) ───────────────────────────
+// Work roles stay in `experience`. The SWE editions print both lists under
+// separate headings: Work Experience, then Other Experience. The PM renderer
+// appends this list after `experience`.
+// SOLID appears here once, on the Advanced Programming TA role, not on every role.
+
+#let other-experience = (
+  (
+    company:  "University of Tehran",
+    role:     "Head Teaching Assistant — Advanced Programming",
+    role-pm:  "Head TA & Course Coordinator",
+    location: "Tehran",
+    period:   "2026–Present",
+    concurrent: true,
+    desc:     "Leading teaching staff and curriculum infrastructure for competitive CS engineering course.",
+    tech:     "",
+    bullets-swe: (
+      "Lead a team of 15+ TAs across problem design, code reviews, grading, and curriculum delivery for 200+ undergraduate students per semester.",
+      "Designed and maintain the containerized Docker CI judge and automated assignment evaluation toolchain used across all terms for Java OOP, SOLID, and concurrency coursework.",
+    ),
+    bullets-pm: (
+      "Manage cross-functional TA team of 15 members; define semester roadmaps, assignment delivery schedules, and evaluation standards.",
+      "Gather continuous student feedback to iterate on problem difficulty curves, improving project completion rates and assignment clarity.",
+    ),
+  ),
+
+  (
+    company:  "Hambazi — Boardgame & Startup Community",
+    role:     "Co-Founder & Lead Architect",
+    role-pm:  "Chief Technology Officer",
+    location: "Tehran",
+    period:   "Aug 2025–Present",
+    concurrent: true,
+    desc:     "Startup community platform for future founders.",
+    tech:     "",
+    bullets-swe: (
+      "Built a Telegram bot for user, event, and game management, backed by the community platform backend (NestJS and Next.js) that supports event scheduling, matchmaking, and member workflows for 1,000+ active members.",
+    ),
+    bullets-pm: (
+      "Designing a platform for a boardgame and startup community.",
+    ),
+  ),
+)
+
+// ── Professional Certifications (PM edition, page 2 card grid) ───────────────
+// The SWE edition prints certifications inside `awards`. This list is read only
+// by `render-two-page-resume`, so it still carries the earlier card copy.
 
 #let certifications = (
   (
