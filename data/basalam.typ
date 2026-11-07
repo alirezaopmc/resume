@@ -6,8 +6,8 @@
 // Posting keywords: Python, FastAPI or Django, REST APIs, SQL and NoSQL,
 // MongoDB, Redis, Kafka, OOP and SOLID, code review, concurrency, query optimization.
 // Not claimed (no evidence in profile.typ): FastAPI.
-// MongoDB has no role source after the Cubecraft entry was removed (18 Oct 2026).
-// Confirm it before this edition is sent. See docs/decisions/004-basalam-edition.md.
+// MongoDB is sourced by the CubeCraft role (Sep 2016–Feb 2017), restored 7 Nov 2026.
+// See docs/decisions/004-basalam-edition.md.
 // ─────────────────────────────────────────────────────────────────────────────
 
 #let title = "Senior Back-End Software Engineer"
