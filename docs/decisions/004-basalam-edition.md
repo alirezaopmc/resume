@@ -28,7 +28,7 @@ Build and gate:
 Claim rule for the overlay:
 
 - Every term in the overlay must appear in a role, project, or skill in `profile.typ`. Python and Django come from the Ravindex role and the skills list. OOP design patterns come from the TA role. Clean Architecture comes from the skills list.
-- MongoDB has no role source since the Cubecraft entry was removed on 18 Oct 2026. The overlay keeps it on the owner's instruction, which is the same instruction that puts it in the SWE skills list. Confirm it, or remove it from `data/basalam.typ` and `skills-swe-scan`, before this edition is sent.
+- MongoDB has a role source again: the CubeCraft role lists MongoDB in its tools (restored 7 Nov 2026, from jtash.ir). The overlay and the SWE skills list keep it.
 - React and Next.js come from the Independent role's `tech` line and the SWE skills line (`skills-swe-scan`). The overlay lists them in the TypeScript group, as the SWE edition does (19 Oct 2026).
 - Do not claim terms that have no source in `profile.typ`. For this posting that means FastAPI. Add it only when real work exists, and add the work to `profile.typ` first.
 - SOLID and code review were added on the owner's instruction (18 Oct 2026). SOLID sits in the skills inventory and the Advanced Programming TA role. Code review sits in the TA role and the skills line. They are not repeated on the work roles. See ADR-005.

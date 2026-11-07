@@ -20,14 +20,14 @@ SWE reading order:
 
 1. Header in the body: 22 pt name, the SWE title `Senior Back-End Software Engineer`, the location line `Tehran, Iran | Open to Remote`, and the contact lines (phone, email, `jtash.ir`, GitHub, LinkedIn). No slogan.
 2. `Summary` (degree named here).
-3. `Skills` as a two-level list (`skills-swe-scan`): two bold labels, `Primary` and `Familiar`, each followed by its items, with the `-` marker. Primary holds the tools used across several roles or projects. Familiar holds those used once or only in a skills list.
+3. `Skills` is a list (`skills-swe-scan`) of four bold labels, `Primary`, `Frameworks`, `Familiar`, and `Communication`, each followed by its items, with the `-` marker. Primary holds the core languages and data stores. Frameworks groups frameworks by language. Familiar holds tools used less often. Communication is one sentence on how the owner works, not a list of soft skills.
 4. `Work Experience`, latest role first, then the rest. Entries that overlap another entry are marked `Concurrent` in the data and not printed.
 5. `Other Experience` (teaching and academic roles, ADR-005).
-6. `Education`, `Projects`, `Awards & Certifications` (one merged list, the last section).
+6. `Education`, `Projects` (the last section). The SWE renderer does not print awards or certifications (amended 7 Nov 2026). The PM edition still reads `awards` from the shared data.
 
 Page budget: the SWE PDF is exactly two A4 pages with body text at 10 pt. Margins are 1.4 cm at the sides and 1.3 cm top and bottom, inside the 0.5 in floor in `docs/research/typography-and-layout.md`. Leading is 0.42 em. Role headers stick to their first bullet, and section headings stick to the block under them, so a page never ends on a title.
 
-When a later edit pushes the PDF to a third page, shorten copy first. Do not drop body text below 10 pt to make it fit. Page 1 holds the header, Summary, Skills, and the recent roles. Experience continues on page 2, followed by Other Experience, Education, Projects, and Awards & Certifications.
+When a later edit pushes the PDF to a third page, shorten copy first. Do not drop body text below 10 pt to make it fit. Page 1 holds the header, Summary, Skills, and the recent roles. Experience continues on page 2, followed by Other Experience, Education, and Projects.
 
 Dates use an en dash with no spaces (`2025–Present`). A missing month stays missing and is listed in `docs/review/2026-10-18-swe-gap-review.md`.
 
@@ -48,6 +48,10 @@ That prints `Education` before `Experience` and breaks the heading order in ADR-
 ### Keep Skills at the end of the file
 
 The first version of the SWE edition put Skills last so the open-ATS heading check and the reading-order gate both saw Experience first. The owner moved Skills under Summary on 18 Oct 2026. The heading check does not depend on position, and the reading-order gate now expects `Summary`, `Skills`, `Experience`. See ADR-003.
+
+## Amendment (7 Nov 2026): page budget
+
+The owner accepted a three-page SWE edition after restoring CubeCraft and adding the independent-work entries (ADR-005). The SWE, BaSalam, and PM PDFs build at three pages. The Awards & Certifications section stays out of the SWE renderer. The 10 pt floor and the rule to shorten copy before shrinking type still apply. If the owner asks for two pages again, cut CubeCraft to two bullets or drop the Plotset entry.
 
 ## Consequences
 

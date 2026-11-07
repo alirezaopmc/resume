@@ -16,7 +16,7 @@
 // ── Profile Summaries ────────────────────────────────────────────────────────
 
 #let summary-swe = [
-  Back-end engineer with 4+ years of production experience, working across different technologies, programming languages, databases, paradigms, and products. Builds concurrency-safe financial systems, high-throughput APIs, and real-time data pipelines, and also builds front ends for full-stack products. M.Sc. candidate in Computer Engineering.
+  Back-end engineer with 4+ years in startups, building concurrency-safe ledgers, multi-tenant SaaS, high-throughput APIs, and real-time data pipelines across fintech, crypto, gaming, and retail. Also works on the product side: runs requirement sessions with owners who are not technical, turns them into specs, state machines, and release scope, and builds the front end for full-stack products. M.Sc. candidate in Computer Engineering, researching interpretability and hallucination in large language models.
 ]
 
 #let summary-pm = [
@@ -37,11 +37,14 @@
 )
 
 // Categorized Skills block printed under Summary. Each pair is (label, items).
-// Every item must also appear in a role, project, or education entry below,
-// or in the skills inventory above. Role `tech` strings carry the wider set.
+// Primary, Frameworks, and Familiar are the owner's list (7 Nov 2026).
+// Gin, Fiber, and FastAPI are the owner's claim and have no role source yet.
+// Communication is one sentence, not a list of soft skills (owner's rule).
 #let skills-swe-scan = (
-  ("Primary",  "Go (Golang), Python (Django), Java 21 (Spring Boot 3), TypeScript (NestJS, Next.js, React, Node.js), PostgreSQL (High Availability, Replication, Partitioning, Query Optimization), Redis, Apache Kafka, RabbitMQ, REST, Docker, Clean Architecture, SOLID, Concurrency Control"),
-  ("Familiar", "Kotlin, MongoDB, GraphQL, API Gateways & Rate Limiting, Kubernetes, Terraform, GCP, Linux, CI/CD, Prometheus, Grafana, Liquibase"),
+  ("Primary",       "Go, TypeScript, Python, PostgreSQL, Redis, Apache Kafka"),
+  ("Frameworks",    "Gin, Fiber (Go) · NestJS, Next.js (TypeScript) · Django, FastAPI (Python)"),
+  ("Familiar",      "MongoDB, Kubernetes, Terraform, GCP, CI/CD, Monitoring (Prometheus, Grafana), UI/UX"),
+  ("Communication", "Explains systems clearly to engineers, non-technical owners, and AI coding agents through specs, decision records, and agent briefs. Resolves technical and scope conflicts by gathering the facts first, logging open decisions, and getting sign-off."),
 )
 
 #let skills-pm = (
@@ -103,7 +106,7 @@
     degree:      "M.Sc. in Computer Engineering — Algorithms and Computation",
     institution: "University of Tehran",
     period:      "Sep 2024–Present",
-    note:        [Research focus: Distributed algorithms and fault-tolerant coordination.],
+    note:        [Research focus: Large language models, hallucination, and mechanistic interpretability. Thesis: _Interpreting Neural Network Thoughts_.],
   ),
   (
     degree:      "B.Sc. in Computer Engineering",
@@ -129,25 +132,6 @@
 // `concurrent` records a date overlap. The SWE renderer does not print it.
 
 #let experience = (
-  (
-    company:  "Independent",
-    role:     "Consultant and Lead Back-End Developer",
-    role-pm:  "Consultant and Developer",
-    location: "Tehran",
-    period:   "2025–Present",
-    concurrent: true,
-    desc:     "Consulting and development for local businesses.",
-    tech:     "Go, NestJS, PostgreSQL, Redis, Next.js, React, Bun",
-    bullets-swe: (
-      "Built an early-stage multi-currency trading SaaS for a few jewelry merchants as a full-stack NestJS and Next.js product, with integer minor-unit arithmetic, pessimistic row locks, and an append-only journal so concurrent orders never oversell stock, processing 10,000 daily transactions with zero balance drift.",
-      "Built a full-stack multi-site kitchen inventory system with a single authoritative ledger for intake, transfers, waste, and usage across freezers, prep lines, and ambient stock for multiple sites, plus a notification system and monitoring and tracking across all sites.",
-    ),
-    bullets-pm: (
-      "Consulted jewelry stores on moving in-person settlement onto a shared trading, wallet, and settlement flow.",
-      "Scoped a phone-first kitchen inventory flow for staff who work quickly and with wet or gloved hands.",
-    ),
-  ),
-
   (
     company:  "LvtGames",
     role:     "Software Engineer",
@@ -235,8 +219,8 @@
     role-pm:  "Research and Development Intern",
     location: "California, US",
     workplace: "Remote",
-    period:   "Aug 2021–Jul 2022",
-    concurrent: true,
+    period:   "Aug 2020–Jul 2021",
+    concurrent: false,
     desc:     "Research on charting tools for non-technical users.",
     tech:     "",
     bullets-swe: (
@@ -244,6 +228,30 @@
     ),
     bullets-pm: (
       "Researched user workflows for data visualizers to simplify chart and map creation for non-technical users.",
+    ),
+  ),
+
+  (
+    company:  "CubeCraft",
+    role:     "Game Developer",
+    role-pm:  "Game Developer",
+    location: "London, UK",
+    workplace: "Remote",
+    period:   "Sep 2016–Feb 2017",
+    concurrent: false,
+    desc:     "Minecraft minigame platform.",
+    tech:     "Java, Spigot API, PaperMC, MongoDB",
+    bullets-swe: (
+      "Built customizable and maintainable Spigot game mode plugins handling high concurrency.",
+      "Designed state machines with 50+ states and 100+ transitions to manage complex gameplay loops.",
+      "Implemented over 300 event listeners and schedulers to optimize real-time tick performance.",
+      "Debugged and enhanced low-level libraries in the core Java codebase.",
+    ),
+    bullets-pm: (
+      "Built customizable and maintainable Spigot game mode plugins handling high concurrency.",
+      "Designed state machines with 50+ states and 100+ transitions to manage complex gameplay loops.",
+      "Implemented over 300 event listeners and schedulers to optimize real-time tick performance.",
+      "Debugged and enhanced low-level libraries in the core Java codebase.",
     ),
   ),
 )
@@ -256,6 +264,53 @@
 
 #let other-experience = (
   (
+    company:  "Manova: Falak",
+    role:     "Developer & Technical Product Manager",
+    role-pm:  "Technical Product Manager & Developer",
+    location: "Sari, Mazandaran, Iran",
+    period:   "Jul 2026–Present",
+    concurrent: true,
+    desc:     "Multi-tenant operations SaaS for restaurants.",
+    tech:     "Go, PostgreSQL, Next.js, Orbit Auth",
+    bullets-swe: (
+      "Designed and built Falak, a multi-tenant SaaS for restaurant operations covering stock across locations, receipts with partial payments and overdue tracking, and role-based access with location-scoped roles.",
+      "Ran requirement sessions with restaurant owners who were not technical, turning their daily routines into module specifications, acceptance flows, and architecture decisions that set each release's scope.",
+      "Defined and verified the UX rules for staff working on phones and tablets: 390 px and 768 px checked before desktop, 44 px touch targets, full-screen flows on small screens, and Persian and English in RTL at every width.",
+      "Modeled stock as an append-only movement ledger with row-locked atomic batches and negative-balance guards, and enforced tenant isolation with PostgreSQL row-level security (FORCE RLS) on the inventory, receipts, and identity tables.",
+    ),
+    bullets-pm: (
+      "Designed and built Falak, a multi-tenant SaaS for restaurant operations covering stock across locations, receipts with partial payments and overdue tracking, and role-based access with location-scoped roles.",
+      "Ran requirement sessions with restaurant owners who were not technical, turning their daily routines into module specifications, acceptance flows, and architecture decisions that set each release's scope.",
+      "Defined and verified the UX rules for staff working on phones and tablets: 390 px and 768 px checked before desktop, 44 px touch targets, full-screen flows on small screens, and Persian and English in RTL at every width.",
+      "Modeled stock as an append-only movement ledger with row-locked atomic batches and negative-balance guards, and enforced tenant isolation with PostgreSQL row-level security (FORCE RLS) on the inventory, receipts, and identity tables.",
+    ),
+  ),
+
+  (
+    company:  "Goldstein",
+    role:     "Developer & Technical Product Manager",
+    role-pm:  "Technical Product Manager & Developer",
+    location: "Mashhad, Khorasan, Iran",
+    period:   "Jul 2026–Present",
+    employment: "Contract",
+    concurrent: true,
+    desc:     "Multi-tenant SaaS for jewelry retailers, built with a team of three.",
+    tech:     "NestJS, Next.js, PostgreSQL, Prisma, Redis, PgBouncer",
+    bullets-swe: (
+      "Co-built a multi-tenant SaaS platform for jewelry retailers to trade physical assets in real time, covering customer verification, a digital wallet ledger, live buy and sell pricing, and physical delivery.",
+      "Ran requirement sessions with store owners who were not technical, converting them into a feature catalog, state machines, and a logged list of open decisions, with a written change process so scope moved only with sign-off.",
+      "Built a concurrency-safe trading engine with pessimistic row locks on inventory and wallet balances, no short selling, and an append-only audit ledger for every balance change.",
+      "Load-tested the engine and traced a cross-store slowdown (one busy store slowed others about 33× at p50) to a shared database connection pool. Sizing the pool and adding PgBouncer brought the slowdown to 1.35× in tests.",
+    ),
+    bullets-pm: (
+      "Co-built a multi-tenant SaaS platform for jewelry retailers to trade physical assets in real time, covering customer verification, a digital wallet ledger, live buy and sell pricing, and physical delivery.",
+      "Ran requirement sessions with store owners who were not technical, converting them into a feature catalog, state machines, and a logged list of open decisions, with a written change process so scope moved only with sign-off.",
+      "Built a concurrency-safe trading engine with pessimistic row locks on inventory and wallet balances, no short selling, and an append-only audit ledger for every balance change.",
+      "Load-tested the engine and traced a cross-store slowdown (one busy store slowed others about 33× at p50) to a shared database connection pool. Sizing the pool and adding PgBouncer brought the slowdown to 1.35× in tests.",
+    ),
+  ),
+
+  (
     company:  "University of Tehran",
     role:     "Head Teaching Assistant — Advanced Programming",
     role-pm:  "Head TA & Course Coordinator",
@@ -265,7 +320,7 @@
     desc:     "Leading teaching staff and curriculum infrastructure for competitive CS engineering course.",
     tech:     "",
     bullets-swe: (
-      "Lead a team of 15+ TAs across problem design, code reviews, grading, and curriculum delivery for 200+ undergraduate students per semester.",
+      "Lead a team of 15+ TAs across problem design, code reviews, grading, and curriculum delivery for 50+ undergraduate students per semester.",
       "Designed and maintain the containerized Docker CI judge and automated assignment evaluation toolchain used across all terms for Java OOP, SOLID, and concurrency coursework.",
     ),
     bullets-pm: (

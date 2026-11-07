@@ -757,16 +757,4 @@
     ]
   }
 
-  [= Awards & Certifications]
-  stack(
-    dir: ttb,
-    spacing: 3pt,
-    ..data.awards.map(((place, name, date)) => [
-      #text(weight: "bold", fill: c-text, place)
-      #h(0.35em)
-      #text(fill: c-body, name)
-      #h(0.35em)
-      #text(fill: c-muted)[(#date)]
-    ]),
-  )
 }
